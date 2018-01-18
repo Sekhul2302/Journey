@@ -127,6 +127,7 @@
 	}
 	/* end save */
 	
+	/* add remark fill data */
 	function fillData(data){
 		var dt = $("#anggota-dt");
 		var tbody = dt.find('tbody');
@@ -145,6 +146,7 @@
 			tbody.append(thead);
 		});
 	}
+	/* end remark fill data */
 	
 	function showData(){
 		$.ajax({
