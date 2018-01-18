@@ -5,6 +5,7 @@ import java.util.List;
 import com.perpustakaan.model.Anggota;
 
 public interface AnggotaDao {
+	/*<dao sekhul>*/
 	public void save(Anggota anggota)throws Exception;
 	
 	public void delete(int id) throws Exception;
