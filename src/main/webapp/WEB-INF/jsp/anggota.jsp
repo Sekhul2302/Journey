@@ -24,15 +24,40 @@
 		
 		$("#simpan").on("click",function(){
 			save();
+			showData();
+		});
+		
+		$("#update").on("click",function(){
+			var id = $("#id").val();
+			var nis = $("#nis").val();
+			var nama = $("#nama").val();
+			var alamat = $("#alamat").val();
 			
+			var anggota = {
+				id : id	,
+				nis : nis,
+				nama : nama,
+				alamat : alamat
+			}
+			
+			$.ajax({
+				url : '/anggota/update',
+				type : 'PUT',
+				contentType : 'application/json',
+				data : JSON.stringify(anggota),
+				success : function(data,a,xhr){
+					console.log('oke disimpan');
+				}
+			});
 		});
 		
 		$(document).on("click",'.delete',function(){
 			var r = confirm("Apakah anda akan menghapus file Data ini ?");
 			if (r == true){
 				onDelete(this);
+				this.showData();
 			}else{
-				location.reload();
+				showData();
 			}
 		});
 		
@@ -64,6 +89,7 @@
 		<form>
 			<div class="form-group col-xs-4">
 				<label>NIS</label>
+				<input type="hidden" class="form-control" id="id" placeholder="Masukan NIS siswa" name="id" disabled="disabled">
 				<input type="text" class="form-control" id="nis" placeholder="Masukan NIS siswa" name="nis">
 				<label>NAMA</label>
 				<input type="text" class="form-control" id="nama" placeholder="Masukan Nama Siswa" name="nama">
@@ -163,14 +189,16 @@
 		var id = $(del).attr('id_delete');
 		
 		$.ajax({
-			url : 'anggota/delete/'+id,
+			url : '/anggota/delete/'+id,
 			type : 'DELETE',
 			contentType : JSON,
 			success : function(data,x ,xhr){
 				alert("berhasil dihapus");
+				showData();
 			},
 			error : function(){
 				alert("gagal");
+				showData();
 			}
 		});
 	}
@@ -178,6 +206,7 @@
 	 
 	
 	function editData(data){
+		$("#id").val(data.id);
 		$("#nis").val(data.nis);
 		$("#nama").val(data.nama);
 		$("#alamat").val(data.alamat);
