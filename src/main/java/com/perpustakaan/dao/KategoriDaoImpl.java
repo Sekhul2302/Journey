@@ -39,6 +39,8 @@ public class KategoriDaoImpl implements KategoriDao{
 		Kategori kategori = new Kategori();
 		kategori.setId(id);
 		session.delete(kategori);
+		session.flush();
+		session.close();
 	}
 
 	public List<Kategori> getAll() throws Exception {

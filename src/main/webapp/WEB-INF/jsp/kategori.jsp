@@ -15,6 +15,11 @@
 	src="/resources/assets/jquery-3.2.1.min.js"></script>
 <script type="text/javascript"
 	src="/resources/assets/js/bootstrap.min.js"></script>
+<style type="text/css">
+.thh{
+	background-color: green;
+}
+</style>
 	
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -61,10 +66,10 @@
 					
 				</form>
 				<table class="table table-striped" id='dataTable'>
-						<thead>
+						<thead class='thh'>
 							<tr>
 								<td align="left"><b>JENIS KATEGORI</b></td>
-								<td colspan="2" align="center"><b>ACTION</b></td>
+								<td><b>ACTION</b></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -108,10 +113,12 @@
 		
 		$.each(data,function(index, kategori){
 			var thead = "<tr>";
-			
 			thead +="<td>"; thead+=kategori.namaKategori; thead += "</td>";
-			thead +="<td>" ; thead += "<a id_delete='"+kategori.id+"' href='#' class='delete'> Delete </a>";
-			thead +="<td>"; thead+="<input type='submit' class='edit button btn-warning' value='edit'>"; thead += "</td>";
+			thead +="<td>"; 
+				thead+="<input type='submit' id_delete='"+kategori.id+"' class='delete button btn-warning' value='Delete'>"; 
+				thead+="<input type='submit' class='edit button btn-warning' value='edit'>";
+			thead += "</td>";
+			/* thead +="<td>"; thead+="<input type='submit' class='edit button btn-warning' value='edit'>"; thead += "</td>"; */
 			thead +="</tr>"
 			tBody.append(thead);
 		});
