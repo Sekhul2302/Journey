@@ -17,7 +17,7 @@
 	src="/resources/assets/js/bootstrap.min.js"></script>
 <style type="text/css">
 .thh{
-	background-color: green;
+	background-color: #5cb85c;
 }
 </style>
 	
@@ -32,11 +32,46 @@
 		
 		$(document).on('click','.delete',function(){
 			onDelete(this);
+			showData();
 		});
 		
 		$(document).on('click','.edit',function(){
-			alert('edit');
+			var id = $(this).attr('id_edit');
+			$.ajax({
+				url : '/kategori/getid/'+id,
+				type : 'GET',
+				success : function(data){
+					onEdit(data)
+					console.log('sukses');
+				}
+			});
 		});
+		
+		$('#update').on('click',function(){
+			var id = $('#idKategori').val();
+			var namaKategori = $('#namaKategori').val();
+			
+			var update = {
+					id : id,
+					namaKategori : namaKategori
+			}
+			
+			$.ajax({
+				url : '/kategori/update',
+				contentType : 'application/json',
+				type : 'PUT',
+				data : JSON.stringify(update),
+				success : function(Status){
+					if (Status==200){
+						console.log('sukses');
+					}else{
+						console.log('gagal udate');
+					}
+				}
+			});
+		});
+		
+		
 	});
 
 </script>
@@ -57,9 +92,11 @@
            		<form id="formKategori">
            			<div class="form-group col-xs-4">
 						<label>Nama Kategori</label>
+						<input type="hidden" id="idKategori">
 						<input type="text" class="form-control" id="namaKategori" placeholder="Masukan Nama Kategori"/>
 						<br>
 						<input type="submit" id="simpan" class="btn btn-success" value="Simpan">
+						<input type="submit" id="update" class="btn btn-success" value="Update">
 					</div>
 					<br>
 					
@@ -101,7 +138,8 @@
 			data : JSON.stringify(kategori),
 			type : 'POST',
 			success : function(data,a,xhr){
-				console.log('data berhasil disimpan')
+				console.log('data berhasil disimpan');
+				showData();
 			}
 		});
 	};
@@ -116,9 +154,8 @@
 			thead +="<td>"; thead+=kategori.namaKategori; thead += "</td>";
 			thead +="<td>"; 
 				thead+="<input type='submit' id_delete='"+kategori.id+"' class='delete button btn-warning' value='Delete'>"; 
-				thead+="<input type='submit' class='edit button btn-warning' value='edit'>";
+				thead+="<input type='submit' id_edit='"+kategori.id+"' class='edit button btn-warning' value='edit'>";
 			thead += "</td>";
-			/* thead +="<td>"; thead+="<input type='submit' class='edit button btn-warning' value='edit'>"; thead += "</td>"; */
 			thead +="</tr>"
 			tBody.append(thead);
 		});
@@ -141,12 +178,18 @@
 		$.ajax({
 			url : '/kategori/delete/'+id,
 			type : 'DELETE',
-			contentType : JSON,
+			contentType : 'aplication/json',
 			success : function(data,x,xhr){
 				console.log('data dihapus');
 				alert('sukses');
+				showData();
 			}
 		})
+	};
+	
+	function onEdit(data){
+		var idKategori = $("#idKategori").val(data.id);
+		var namaKategori = $("#namaKategori").val(data.namaKategori);
 	};
 </script>
 </html>

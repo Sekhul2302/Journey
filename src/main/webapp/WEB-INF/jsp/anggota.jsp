@@ -55,7 +55,7 @@
 			var r = confirm("Apakah anda akan menghapus file Data ini ?");
 			if (r == true){
 				onDelete(this);
-				this.showData();
+				showData();
 			}else{
 				showData();
 			}
@@ -191,7 +191,7 @@
 		$.ajax({
 			url : '/anggota/delete/'+id,
 			type : 'DELETE',
-			contentType : JSON,
+			contentType : 'aplication/json',
 			success : function(data,x ,xhr){
 				alert("berhasil dihapus");
 				showData();

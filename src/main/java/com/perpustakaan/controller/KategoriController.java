@@ -53,6 +53,7 @@ public class KategoriController {
 		return serviceKategori.getAll();
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/getid/{id}", method=RequestMethod.GET)
 	@ResponseStatus(value=HttpStatus.OK)
 	public Kategori getId(@PathVariable int id) throws Exception{

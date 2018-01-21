@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.perpustakaan.model.Anggota;
 
-public interface AnggotaDao {
+public interface AnggotaDao  {
 	/*<dao sekhul>*/
 	public void save(Anggota anggota)throws Exception;
 	
@@ -15,4 +15,5 @@ public interface AnggotaDao {
 	public List<Anggota>getAllAnggota() throws Exception;
 	
 	public void update (Anggota anggota)throws Exception;
+	
 }

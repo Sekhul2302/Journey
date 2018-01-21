@@ -54,8 +54,7 @@ public class KategoriDaoImpl implements KategoriDao{
 	public Kategori getId(int id) throws Exception {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Kategori kategori = new Kategori();
-		session.get(Buku.class,id);
+		Kategori kategori = session.get(Kategori.class,id);
 		return kategori;
 	}
 
