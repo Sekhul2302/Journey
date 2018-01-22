@@ -47,6 +47,7 @@
 			});
 		});
 		
+		/* <update> */
 		$('#update').on('click',function(){
 			var id = $('#idKategori').val();
 			var namaKategori = $('#namaKategori').val();
@@ -153,8 +154,8 @@
 			var thead = "<tr>";
 			thead +="<td>"; thead+=kategori.namaKategori; thead += "</td>";
 			thead +="<td>"; 
-				thead+="<input type='submit' id_delete='"+kategori.id+"' class='delete button btn-warning' value='Delete'>"; 
-				thead+="<input type='submit' id_edit='"+kategori.id+"' class='edit button btn-warning' value='edit'>";
+				thead+="<input type='submit' id_delete='"+kategori.id+"' class='delete button btn-warning' value='Delete'>&nbsp;"; 
+				thead+="&nbsp;<input type='submit' id_edit='"+kategori.id+"' class='edit button btn-warning' value='edit'>";
 			thead += "</td>";
 			thead +="</tr>"
 			tBody.append(thead);
