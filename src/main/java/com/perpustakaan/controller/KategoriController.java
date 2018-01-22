@@ -59,4 +59,5 @@ public class KategoriController {
 	public Kategori getId(@PathVariable int id) throws Exception{
 		return serviceKategori.getId(id);
 	}
+	/*<test>*/
 }
