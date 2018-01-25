@@ -13,16 +13,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.perpustakaan.model.Buku;
+import com.perpustakaan.model.Kategori;
 import com.perpustakaan.service.ServiceBuku;
+import com.perpustakaan.service.ServiceKategori;
 
 @Controller
 @RequestMapping("/buku")
 public class BukuController {
 	@Autowired
 	ServiceBuku serviceBuku;
+	@Autowired
+	ServiceKategori serviceKategori;
 	
 	@RequestMapping
-	public String Model(){
+	public String Model(org.springframework.ui.Model model) throws Exception{
+		List<Kategori>kategoris = serviceKategori.getAll();
+		model.addAttribute("listkategori",kategoris);
+		List<Buku>bukus = serviceBuku.getAllBuku();
+		model.addAttribute("listbuku",bukus);
 		return "buku";
 	}
 	

@@ -180,7 +180,7 @@
 			type : 'GET',
 			contentType : JSON,
 			success : function(data,x ,xhr){
-				fillData(data)
+				fillData(data);
 			}
 		});
 	}
