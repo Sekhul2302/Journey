@@ -59,7 +59,7 @@ public class BukuController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/getid", method= RequestMethod.GET)
+	@RequestMapping(value="/getid/{id}", method= RequestMethod.GET)
 	@ResponseStatus(value=HttpStatus.OK)
 	public Buku getIdBuku(@PathVariable int id) throws Exception{
 		return serviceBuku.getIdBuku(id);

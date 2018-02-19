@@ -31,10 +31,28 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		showData();
+		
 		
 		$('#simpan').on('click',function(){
 			save();
+		});
+		
+		$(document).on('click','.delete',function(){
+			onDelete(this);
+		});
+		
+		$(document).on('click','.edit',function(){
+			var id = $(this).attr('doEdit');
+			
+			$.ajax({
+				url : '/buku/getid/'+id,
+				type : 'GET',
+				success : function(data){
+					console.log('load');
+					fillData(data);
+					
+				}
+			});
 		});
 	});
 
@@ -56,7 +74,7 @@
            		<form id="formKategori">
            			<div class="form-group col-xs-4">
 						<label>Judul Buku</label>
-						<!-- <input type="hidden" id="idKategori"> -->
+						<input type="hidden" id="idBuku">
 						<input type="text" class="form-control" id="judulBuku" placeholder="Masukan judulBuku"/>
 						<label>No ISBN</label>
 						<input type="text" class="form-control" id="noIsbn" placeholder="Masukan noIsbn"/>
@@ -106,8 +124,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							
-							<tr>
+							<c:forEach var="buku" items="${listbuku }">
+								<tr>
+									<td>${buku.judul}</td>
+									<td>${buku.isbn}</td>
+									<td>${buku.penerbit}</td>
+									<td>${buku.pengarang}</td>
+									<td>${buku.idKategori.namaKategori}</td>
+									<td>${buku.jmlHalaman}</td>
+									<td>${buku.tahun}</td>
+									<td>${buku.stok}</td>
+									<td>${buku.noRak}</td>
+									<td><a href="#" doDelete="${buku.id}" class="delete btn-warning">delete</a></td>
+									<td><a href="#" doEdit="${buku.id}" class="edit btn-primary">Edit</a></td>
+								</tr>
+							</c:forEach>
+							<!-- <tr>
 								<td>-</td>
 								<td>-</td>
 								<td>-</td>
@@ -119,7 +151,7 @@
 								<td>-</td>
 								<td>Update</td>
 								<td>Delete</td>
-							</tr>
+							</tr> -->
 						</tbody>
 				</table>
          	</div>
@@ -164,7 +196,38 @@
 		});
 	}
 	
-	function showData(){
+	function onDelete(del){
+		var id = $(del).attr('doDelete');
+		
+		$.ajax({
+			url : '/buku/delete/'+id,
+			type : 'DELETE',
+			contentType : 'application/JSON',
+			success : function(){
+				alert('sukses dihapus');
+			}
+		});
+	}
+	
+	function fillData(data){
+		$("#idBuku").val(data.id);
+		$("#judulBuku").val(data.judul);
+		$("#noIsbn").val(data.isbn);
+		$("#penerbit").val(data.penerbit);
+		$("#pengarang").val(data.pengarang);
+		$("#jmlHalaman").val(data.jmlHalaman);
+		$("#tahun").val(data.tahun);
+		$("#stock").val(data.stok);
+		$("#noRak").val(data.noRak);
+	}
+	
+	//tes
+	
+	/* function onDelete(del){
+		var del = ${''}
+	} */
+	
+	/* function showData(){
 		$.ajax({
 			url : '/buku/getall',
 			contentType : JSON,
@@ -174,9 +237,9 @@
 				fillData(data);
 			}
 		});
-	}
+	} */
 	/*  s*/
-	function fillData(data){
+	/* function fillData(data){
 		var dt = $('#dataTable');
 		var tbody = dt.find('tbody');
 		tbody.find('tr').remove();
@@ -197,7 +260,7 @@
 			thead +="</tr>";
 			tbody.append(thead);
 		});
-	}
+	} */
 	
 	/* function getKategori(){
 		var x = document.getElementById("${buku.id}");

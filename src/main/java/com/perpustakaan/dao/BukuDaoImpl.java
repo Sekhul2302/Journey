@@ -51,8 +51,7 @@ public class BukuDaoImpl implements BukuDao {
 	public Buku getIdBuku(int id) throws Exception {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Buku buku = new Buku();
-		session.get(Buku.class,id);
+		Buku buku =session.get(Buku.class,id);
 		return buku;
 	}
 
