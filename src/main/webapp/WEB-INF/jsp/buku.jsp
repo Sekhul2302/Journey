@@ -50,7 +50,6 @@
 				success : function(data){
 					console.log('load');
 					fillData(data);
-					
 				}
 			});
 		});
@@ -219,6 +218,11 @@
 		$("#tahun").val(data.tahun);
 		$("#stock").val(data.stok);
 		$("#noRak").val(data.noRak);
+		//console.log('test',$("div.kategori select").val("${kategori.id}"));
+		console.log('oy',$("#kategori").val("testttt").change());
+		console.log('data',data);
+		console.log('dataa',data.id)
+		$('#kategori').val('test').change();
 	}
 	
 	//tes
